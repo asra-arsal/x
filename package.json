@@ -1,0 +1,39 @@
+{
+    "author": {
+        "email": "ahmad@shahzad.dev",
+        "name": "Ahmad Shahzad",
+        "url": "https://shahzad.dev"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.20.2",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "nanoid": "^3.3.7",
+        "node-cron": "^3.0.3",
+        "nunjucks": "^3.2.4",
+        "puppeteer": "^21.6.1",
+        "sass": "^1.69.5",
+        "sqlite": "^5.1.1",
+        "sqlite3": "^5.1.6"
+    },
+    "description": "A Twitter automation tool built with Puppeteer.",
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    },
+    "license": "MIT",
+    "main": "main.js",
+    "name": "x-auto",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Ahmad-06/durimi-x-auto"
+    },
+    "scripts": {
+        "start": "node .",
+        "start:dev": "nodemon -e js,html",
+        "start:sass": "sass --watch sass:public/css",
+        "build:sass": "sass sass:public/css"
+    },
+    "version": "0.0.1"
+}
