@@ -1,0 +1,335 @@
+/**
+ * CSS RESET FROM JOSH W. COMEAU
+ * Link: https://www.joshwcomeau.com/css/custom-css-reset/
+ **/
+/**
+ * 1. Use a more-intuitive box-sizing model.
+ **/
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+ * 2. Remove default margin
+ **/
+* {
+  margin: 0;
+}
+
+/**
+ * Typographic tweaks!
+ * 3. Add accessible line-height
+ * 4. Improve text rendering
+ **/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/**
+ * 5. Improve media defaults
+ **/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+ * 6. Remove built-in form typography styles
+ **/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/**
+ * 7. Avoid text overflows
+ **/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/**
+ * 8. Create a root stacking context
+ **/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+* {
+  font-family: "Inria Sans", sans-serif;
+}
+
+#error-overlay {
+  z-index: 15;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  opacity: 0.85;
+  background-color: #000000;
+}
+
+#error-modal {
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 400px;
+  padding: 25px;
+  padding-bottom: 50px;
+  border: 3px solid #ff1b1b;
+  background-color: #000000;
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+}
+#error-modal #error-modal-heading {
+  color: #ff1b1b;
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+#error-modal #error-modal-message {
+  font-size: 18px;
+}
+#error-modal #error-modal-content {
+  color: #999999;
+  padding: 15px;
+  border: 2px dashed #555555;
+  overflow: auto;
+  max-height: 35vh;
+}
+#error-modal #error-modal-content::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  display: none;
+}
+#error-modal #error-modal-content::-webkit-scrollbar-track {
+  background-color: #333;
+  box-shadow: 0 0 0 2px #777;
+  border-radius: 10px;
+}
+#error-modal #error-modal-content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+#error-modal #error-modal-content:hover::-webkit-scrollbar {
+  display: initial;
+}
+#error-modal #error-modal-close {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  color: #111111;
+  border: none;
+  background-color: #ff1b1b;
+  font-size: 24px;
+  position: absolute;
+  right: -25px;
+  bottom: -25px;
+}
+#error-modal #error-modal-close:hover {
+  box-shadow: -3px -3px #ffffff;
+}
+#error-modal #error-modal-close:hover:active {
+  box-shadow: none;
+  transform: translate(-3px, -3px);
+}
+
+#loading-overlay {
+  z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  opacity: 0.85;
+  background-color: #000000;
+}
+
+#loading-icon {
+  z-index: 5;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  border: 10px dashed #7cc0ff;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  -webkit-animation: rotating 10s linear infinite;
+  -moz-animation: rotating 10s linear infinite;
+  -ms-animation: rotating 10s linear infinite;
+  -o-animation: rotating 10s linear infinite;
+  animation: rotating 10s linear infinite;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+    -o-transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+    -o-transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: translate(-50%, -50%) rotate(0deg);
+    -moz-transform: translate(-50%, -50%) rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+    -o-transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    -ms-transform: translate(-50%, -50%) rotate(360deg);
+    -moz-transform: translate(-50%, -50%) rotate(360deg);
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+    -o-transform: translate(-50%, -50%) rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  color: #cccccc;
+  background-color: #111111;
+  display: grid;
+  grid-gap: 25px;
+  grid-template-rows: 75px 50px auto 50px;
+}
+body .hidden {
+  display: none !important;
+}
+body .container {
+  width: 100%;
+  height: inherit;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 720px) {
+  body .mobile-enabled {
+    display: none;
+  }
+}
+@media screen and (max-width: 719px) {
+  body .desktop-enabled {
+    display: none;
+  }
+}
+body a {
+  color: #cccccc;
+  text-decoration: none;
+}
+body a:hover {
+  color: #7cc0ff;
+  text-decoration: underline;
+}
+body #header {
+  width: 100%;
+  height: 75px;
+  box-shadow: 0 0 0 1px #555555;
+}
+body #header .container {
+  display: grid;
+  grid-template-columns: 0.75fr 3.25fr;
+}
+body #header .container .icon {
+  font-size: 24px;
+}
+body #header .container #logo h1 a {
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+body #header .container #menu {
+  gap: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+body #header .container #menu a {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+body #header .container #menu button {
+  cursor: pointer;
+  color: #7cc0ff;
+  border-color: #7cc0ff;
+  background-color: transparent;
+  border: 3px solid;
+  padding: 5px 25px;
+  font-size: 16px;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 719px) {
+  body #header .container #menu button {
+    border: 2px solid;
+    padding: 5px 10px;
+  }
+  body #header .container #menu button .icon {
+    font-size: 18px;
+  }
+}
+body #header .container #menu button:hover {
+  color: #111111;
+  border-color: #7cc0ff;
+  background-color: #7cc0ff;
+  box-shadow: 3px 3px #ffffff;
+}
+body #header .container #menu button:hover:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+body #identifier {
+  width: 100%;
+  height: 50px;
+}
+body #identifier .container #indicator {
+  color: #7cc0ff;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+body #footer {
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 0 0 1px #555555;
+}
+body #footer .container #copyright {
+  font-weight: bold;
+}
+body #footer .container #copyright a {
+  color: #7cc0ff;
+}
+
+/*# sourceMappingURL=base.css.map */

@@ -1,0 +1,326 @@
+.form {
+  width: calc(100vw - 50px);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 25px;
+  padding-bottom: 50px;
+  box-shadow: 0 0 0 1px #555555;
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.form .form-index {
+  width: 50px;
+  height: 50px;
+  color: #111111;
+  background-color: #1bff91;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -25px;
+  left: -25px;
+}
+.form .form-heading {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+.form input {
+  width: 100%;
+}
+.form .form-textarea,
+.form .form-input,
+.form .form-select {
+  cursor: pointer;
+  appearance: none;
+  color-scheme: dark;
+  border: none;
+  color: #cccccc;
+  outline: none;
+  box-shadow: 0 0 0 1px #555555;
+  background-color: #111111;
+  height: 50px;
+  padding: 0 15px;
+}
+.form .form-textarea::placeholder,
+.form .form-input::placeholder,
+.form .form-select::placeholder {
+  color: #999999;
+}
+.form .form-textarea:hover,
+.form .form-input:hover,
+.form .form-select:hover {
+  box-shadow: 0 0 0 1px #7cc0ff;
+}
+.form .form-textarea:focus,
+.form .form-input:focus {
+  box-shadow: 0 0 0 2px #7cc0ff;
+}
+.form .form-textarea {
+  resize: none;
+  height: 125px;
+  padding: 15px;
+}
+.form .form-select {
+  background-image: url("/images/chevron-down.svg");
+  background-size: 15px 15px;
+  background-position-x: calc(100% - 15px);
+  background-position-y: 16.5px;
+  background-repeat: no-repeat;
+}
+.form .form-select:active {
+  box-shadow: 0 0 0 2px #7cc0ff;
+}
+.form .form-options {
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: 1fr 1fr;
+}
+@media screen and (max-width: 430px) {
+  .form .form-options {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+.form .form-buttons {
+  display: grid;
+  grid-gap: 25px;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 50px;
+}
+.form .form-buttons .form-button {
+  cursor: pointer;
+  height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffffff;
+  border: 3px solid #ffffff;
+  background-color: transparent;
+}
+.form .form-buttons .form-button:hover {
+  color: #111111;
+  border: 1px solid #111111;
+  background-color: #cccccc;
+  box-shadow: 3px 3px #ffffff;
+}
+.form .form-buttons .form-button:hover:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+.form .form-buttons .form-button-schedule {
+  color: #7cc0ff;
+  border-color: #7cc0ff;
+}
+.form .form-buttons .form-button-schedule:hover {
+  color: #111111;
+  border: 1px solid #111111;
+  background-color: #7cc0ff;
+}
+.form .form-buttons .form-button-automate {
+  color: #111111;
+  border-color: #fcff62;
+  background-color: #fcff62;
+}
+.form .form-buttons .form-button-automate:hover {
+  border: 1px solid #111111;
+  background-color: #fcff62;
+}
+.form .form-buttons .form-button-publish {
+  grid-column: 1/3;
+  color: #1bff91;
+  border-color: #1bff91;
+}
+.form .form-buttons .form-button-publish:hover {
+  color: #111111;
+  border: 1px solid #111111;
+  background-color: #1bff91;
+}
+.form .form-buttons .form-button-delete {
+  color: #111111;
+  border-color: #ff1b1b;
+  background-color: #ff1b1b;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  right: -25px;
+  bottom: -25px;
+  position: absolute;
+}
+.form .form-buttons .form-button-delete:hover {
+  box-shadow: -3px -3px #ffffff;
+  border: 1px solid #111111;
+  background-color: #ff1b1b;
+}
+.form .form-buttons .form-button-delete:hover:active {
+  box-shadow: none;
+  transform: translate(-3px, -3px);
+}
+.form .form-media {
+  gap: 25px;
+  display: flex;
+  flex-direction: column;
+}
+.form .form-media .form-media-drop-zone {
+  cursor: pointer;
+  height: 75px;
+  border: 2px dashed #555555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #999999;
+}
+.form .form-media .form-media-drop-zone:hover,
+.form .form-media .form-media-drop-zone .highlight {
+  color: #7cc0ff;
+  border-color: #7cc0ff;
+}
+.form .form-media .form-media-gallery {
+  display: flex;
+  gap: 25px;
+  flex-direction: row;
+  overflow: auto;
+}
+.form .form-media .form-media-gallery img {
+  max-height: 100px;
+}
+.form .form-media .form-media-gallery:not(.secondary) img:hover {
+  cursor: no-drop;
+  filter: grayscale(100%);
+}
+.form .form-extra-info {
+  text-align: center;
+}
+.form .form-container,
+.form .form-division {
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+}
+@media screen and (min-width: 1000px) {
+  .form {
+    max-width: 1000px;
+  }
+  .form .form-container {
+    flex-direction: row;
+  }
+  .form .form-container .form-division {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+@media screen and (min-width: 725px) {
+  .form.retweet-form {
+    max-width: 675px;
+  }
+  .form.retweet-form .form-container {
+    flex-direction: row;
+  }
+  .form.retweet-form .form-container .form-division {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+body #content .container {
+  gap: 50px;
+  flex-direction: column;
+}
+body #content .container #action-buttons {
+  width: calc(100vw - 50px);
+  max-width: 500px;
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: 1fr 1fr;
+}
+body #content .container #action-buttons .action-button {
+  cursor: pointer;
+  height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
+  text-transform: uppercase;
+}
+body #content .container #action-buttons .action-button:hover {
+  box-shadow: 3px 3px #ffffff;
+}
+body #content .container #action-buttons .action-button:hover:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+body #content .container #action-buttons .action-button.action-button-primary {
+  color: #7cc0ff;
+  border: 3px solid #7cc0ff;
+}
+body #content .container #action-buttons .action-button.action-button-primary:hover {
+  color: #111111;
+  background-color: #7cc0ff;
+}
+body #content .container #action-buttons .action-button.action-button-danger {
+  color: #ff1b1b;
+  border: 3px solid #ff1b1b;
+}
+body #content .container #action-buttons .action-button.action-button-danger:hover {
+  color: #111111;
+  background-color: #ff1b1b;
+}
+body #content .container #posts {
+  gap: 50px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 25px;
+}
+body #content .container #posts form {
+  position: relative;
+}
+body #content .container #posts form .reorder-buttons {
+  width: 30px;
+  height: 75px;
+  top: 50px;
+  left: -55px;
+  position: absolute;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 724px) {
+  body #content .container #posts form .reorder-buttons {
+    left: -27px;
+    width: 25px;
+  }
+}
+body #content .container #posts form .reorder-buttons button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background: transparent;
+  border: none;
+  color: #fcff62;
+}
+@media screen and (max-width: 724px) {
+  body #content .container #posts form .reorder-buttons button {
+    width: 25px;
+    height: 25px;
+    font-size: 24px;
+  }
+}
+body #content .container #posts .retweet-form {
+  max-width: 350px;
+  padding-bottom: 50px;
+}
+body #content .container #posts .retweet-form[data-form-type=automated] [name=time] {
+  display: none;
+}
+
+/*# sourceMappingURL=re-order.css.map */

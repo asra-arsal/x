@@ -1,0 +1,175 @@
+{% extends '../_base.html' %}
+
+<!-- THE TITLE BLOCK -->
+{% block title %} X-AUTO {% endblock %}
+
+<!-- THE STYLES BLOCK -->
+{% block styles %}
+<link rel="stylesheet" href="/css/home/home.css" />
+{% endblock %}
+
+<!-- THE CONTENT BLOCK -->
+{% block content %}
+<!-- THE RETWEET FORM -->
+<form class="form retweet-form" data-retweet-id="0" onsubmit="event.preventDefault();">
+    <!-- THE INDEX -->
+    <p class="form-index hidden">0</p>
+
+    <!-- THE HEADING -->
+    <h3 class="form-heading" data-retweet-id="0">Create a Retweet</h3>
+
+    <!-- THE ID -->
+    <input type="number" name="id" class="form-input hidden" data-retweet-id="0" value="0" />
+
+    <!-- THE FORM CONTAINER -->
+    <div class="form-container">
+        <!-- THE FORM DIVISION -->
+        <div class="form-division">
+            <!-- THE RETWEET LINK -->
+            <input
+                type="url"
+                name="link"
+                class="form-input"
+                data-retweet-id="0"
+                placeholder="http(s)://(www.)twitter.com/username/status/123456"
+                pattern="^https:\/\/twitter\.com\/(\w*)\/status\/(\d*)" />
+
+            <!-- THE TIME -->
+            <input type="datetime-local" name="time" class="form-input" data-retweet-id="0" />
+        </div>
+
+        <!-- THE PRIORITY -->
+        <input type="number" name="priority" class="form-input hidden" data-retweet-id="0" />
+
+        <!-- THE FORM DIVISION -->
+        <div class="form-division">
+            <!-- THE BUTTONS -->
+            <section class="form-buttons" data-retweet-id="0">
+                <button
+                    class="form-button form-button-schedule"
+                    data-retweet-id="0"
+                    onclick="createRetweet(0, 'scheduled')">
+                    Schedule
+                </button>
+
+                <button
+                    class="form-button form-button-automate"
+                    data-retweet-id="0"
+                    onclick="createRetweet(0, 'automated')">
+                    <i class="fa-regular fa-paper-plane"></i>
+                </button>
+
+                <button
+                    class="form-button form-button-publish"
+                    data-retweet-id="0"
+                    onclick="createRetweet(0, 'publish')">
+                    Publish Now
+                </button>
+            </section>
+        </div>
+    </div>
+</form>
+<!-- END RETWEET FORM -->
+
+<!-- THE TWEET FORM -->
+<form class="form tweet-form" data-tweet-id="0" onsubmit="event.preventDefault();">
+    <!-- THE INDEX -->
+    <p class="form-index hidden">0</p>
+
+    <!-- THE HEADING -->
+    <h3 class="form-heading" data-tweet-id="0">Create a Tweet</h3>
+
+    <!-- THE ID -->
+    <input type="number" name="id" class="form-input hidden" data-tweet-id="0" value="0" />
+
+    <!-- THE FORM CONTAINER -->
+    <div class="form-container">
+        <!-- THE FORM DIVISION -->
+        <div class="form-division">
+            <!-- THE MESSAGE -->
+            <textarea
+                name="message"
+                class="form-textarea"
+                data-tweet-id="0"
+                placeholder="What is happening?!"></textarea>
+
+            <!-- THE LINK -->
+            <!-- <input
+                type="url"
+                name="link"
+                class="form-input"
+                data-tweet-id="0"
+                placeholder="http(s)://(www.)example.org" /> -->
+
+            <!-- THE TAGS -->
+            <input
+                type="text"
+                name="tags"
+                class="form-input"
+                data-tweet-id="0"
+                placeholder="Twitter|elonmusk|Dominos" />
+        </div>
+
+        <!-- THE FORM DIVISION -->
+        <div class="form-division">
+            <!-- THE MEDIA -->
+            <section class="form-media" data-tweet-id="0">
+                <!-- THE DROP ZONE -->
+                <div class="form-media-drop-zone" data-tweet-id="0">Drop media here!</div>
+
+                <!-- THE GALLERY -->
+                <div class="form-media-gallery hidden" data-tweet-id="0"></div>
+
+                <!-- THE SECONDARY GALLERY -->
+                <div class="form-media-gallery secondary hidden" data-tweet-id="0">
+                    <input type="text" name="images" class="form-input hidden" data-tweet-id="0" value="null" />
+                </div>
+
+                <!-- THE FILE INPUT -->
+                <input type="file" name="files" class="hidden" data-tweet-id="0" multiple />
+
+                <!-- THE MEDIA INPUT -->
+                <input type="text" name="media" class="form-input hidden" data-tweet-id="0" />
+            </section>
+        </div>
+
+        <!-- THE PRIORITY -->
+        <input type="number" name="priority" class="form-input hidden" data-tweet-id="0" />
+
+        <!-- THE FORM DIVISION -->
+        <div class="form-division">
+            <!-- THE TIME -->
+            <input type="datetime-local" name="time" class="form-input" data-tweet-id="0" />
+
+            <!-- THE FORM BUTTONS -->
+            <section class="form-buttons" data-tweet-id="0">
+                <button
+                    class="form-button form-button-schedule"
+                    data-tweet-id="0"
+                    onclick="createTweet(0, 'scheduled')">
+                    Schedule
+                </button>
+
+                <button
+                    class="form-button form-button-automate"
+                    data-tweet-id="0"
+                    onclick="createTweet(0, 'automated')">
+                    <i class="fa-regular fa-paper-plane"></i>
+                </button>
+
+                <button class="form-button form-button-publish" data-tweet-id="0" onclick="createTweet(0, 'publish')">
+                    Publish Now
+                </button>
+            </section>
+        </div>
+    </div>
+</form>
+<!-- END TWEET FORM -->
+{% endblock %}
+
+<!-- THE SCRIPTS BLOCK -->
+{% block scripts %}
+<script src="/js/common/handleMedia.js"></script>
+<script src="/js/common/tweets/handleCreateTweet.js"></script>
+<script src="/js/common/retweets/handleCreateRetweet.js"></script>
+{% endblock %}

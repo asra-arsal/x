@@ -1,0 +1,11 @@
+@import '../shared/colors';
+@import '../shared/form';
+
+body {
+    #content {
+        .container {
+            flex-direction: column;
+            gap: 50px;
+        }
+    }
+}

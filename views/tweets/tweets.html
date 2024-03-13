@@ -1,0 +1,353 @@
+{% extends '../_base.html' %}
+
+<!-- THE TITLE BLOCK -->
+{% block title %} Tweets | X-AUTO {% endblock %}
+
+<!-- THE STYLES BLOCK -->
+{% block styles %}
+<link rel="stylesheet" href="/css/common/re-no-tweets.css" />
+{% endblock %}
+
+<!-- THE CONTENT BLOCK -->
+{% block content %}
+<!-- THE TAB SWITCHES -->
+<section id="tab-switches">
+    <!-- THE AUTOMATED SWITCH -->
+    <button
+        class="tab-switch {% if tweets.automated.length > 0 %} active {% endif %}"
+        data-tab="automated"
+        onclick="handleTabSwitch('automated')">
+        Automated Tweets
+    </button>
+
+    <!-- THE SCHEDULED SWITCH -->
+    <button
+        class="tab-switch {% if tweets.automated.length < 1 %} active {% endif %}"
+        data-tab="scheduled"
+        onclick="handleTabSwitch('scheduled')">
+        Scheduled Tweets
+    </button>
+</section>
+
+<!-- THE TABS -->
+<section id="tabs">
+    <!-- THE AUTOMATED TAB -->
+    <section class="tab {% if tweets.automated.length <= 0 %} hidden {% endif %}" data-tab="automated">
+        <!-- THE TAB TITLE -->
+        <h3 class="tab-title">Automated Tweets</h3>
+
+        <!-- THE RE-ORDER BUTTON -->
+        <button class="re-order" data-tab="automated" onclick="handleReOrderSwitch('tweets', 'automated')">
+            Re-Order Tweets
+        </button>
+
+        <!-- THE TWEETS -->
+        <section class="tweets" data-tab="automated">
+            {% for tweet in tweets.automated %}
+            <form
+                class="form tweet tweet-form {% if tweet.status == 'active' %}failed-form{% endif %}"
+                data-tweet-id="{{ tweet.id }}"
+                onsubmit="event.preventDefault();">
+                <!-- THE INDEX -->
+                <p class="form-index">{{ loop.index }}</p>
+
+                <!-- THE HEADING -->
+                <h3 class="form-heading" data-tweet-id="{{ tweet.id }}">Create a Tweet</h3>
+
+                <!-- THE ID -->
+                <input
+                    type="number"
+                    name="id"
+                    class="form-input hidden"
+                    data-tweet-id="{{ tweet.id }}"
+                    value="{{ tweet.id }}" />
+
+                <!-- THE FORM CONTAINER -->
+                <div class="form-container">
+                    <!-- THE FORM DIVISION -->
+                    <div class="form-division">
+                        <!-- THE MESSAGE -->
+                        <textarea
+                            name="message"
+                            class="form-textarea"
+                            data-tweet-id="{{ tweet.id }}"
+                            placeholder="What is happening?!">
+{{ tweet.message }}</textarea
+                        >
+
+                        <!-- THE LINK -->
+                        <!-- <input
+                            type="url"
+                            name="link"
+                            class="form-input"
+                            data-tweet-id="{{ tweet.id }}"
+                            placeholder="http(s)://(www.)example.org"
+                            value="{{ tweet.link }}" /> -->
+
+                        <!-- THE TAGS -->
+                        <input
+                            type="text"
+                            name="tags"
+                            class="form-input"
+                            data-tweet-id="{{ tweet.id }}"
+                            placeholder="Twitter|elonmusk|Dominos"
+                            value="{{ tweet.tags }}" />
+                    </div>
+
+                    <!-- THE PRIORITY -->
+                    <input
+                        type="number"
+                        name="priority"
+                        class="form-input hidden"
+                        data-tweet-id="{{ tweet.id }}"
+                        value="{{ tweet.priority }}" />
+
+                    <!-- THE FORM DIVISION -->
+                    <div class="form-division">
+                        <!-- THE MEDIA -->
+                        <section class="form-media" data-tweet-id="{{ tweet.id }}">
+                            <!-- THE DROP ZONE -->
+                            <div class="form-media-drop-zone" data-tweet-id="{{ tweet.id }}">Drop media here!</div>
+
+                            <!-- THE GALLERY -->
+                            <div class="form-media-gallery hidden" data-tweet-id="{{ tweet.id }}"></div>
+
+                            <!-- THE SECONDARY GALLERY -->
+                            <div class="form-media-gallery secondary" data-tweet-id="{{ tweet.id }}">
+                                <input
+                                    type="text"
+                                    name="images"
+                                    class="form-input hidden"
+                                    data-tweet-id="{{ tweet.id }}"
+                                    value="{{ tweet.media }}" />
+                            </div>
+
+                            <!-- THE FILE INPUT -->
+                            <input type="file" name="files" class="hidden" data-tweet-id="{{ tweet.id }}" multiple />
+
+                            <!-- THE MEDIA INPUT -->
+                            <input type="text" name="media" class="form-input hidden" data-tweet-id="{{ tweet.id }}" />
+                        </section>
+                    </div>
+
+                    <!-- THE FORM DIVISION -->
+                    <div class="form-division">
+                        <!-- THE TIME -->
+                        <input
+                            type="datetime-local"
+                            name="time"
+                            class="form-input"
+                            data-tweet-id="{{ tweet.id }}"
+                            value="{{ tweet.time }}" />
+
+                        <!-- THE BUTTONS -->
+                        <section class="form-buttons" data-tweet-id="{{ tweet.id }}">
+                            <button
+                                class="form-button form-button-automate"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="createTweet('{{ tweet.id }}', 'automated')">
+                                Update
+                            </button>
+
+                            <button
+                                class="form-button form-button-schedule"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="createTweet('{{ tweet.id }}', 'scheduled')">
+                                <i class="fa-solid fa-clock-rotate-left" style="font-size: 18px"></i>
+                            </button>
+
+                            <button
+                                class="form-button form-button-publish"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="createTweet('{{ tweet.id }}', 'publish')">
+                                Publish Now
+                            </button>
+
+                            <!-- THE DELETE BUTTON -->
+                            <button
+                                class="form-button form-button-delete"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="deleteTweet('{{ tweet.id }}')">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- THE EXTRA INFO -->
+                <section class="form-extra-info">
+                    <!-- THE PUBLISH TIME -->
+                    <h4 class="publish-time">
+                        <span data-publish-id="{{ loop.index }}" class="publish-time-date">2023-09-11</span> |
+                        <span data-publish-id="{{ loop.index }}" class="publish-time-day">Monday</span> |
+                        <span data-publish-id="{{ loop.index }}" class="publish-time-time">09:00 PM</span>
+                    </h4>
+                    <!-- END PUBLISH TIME -->
+                </section>
+            </form>
+            {% endfor %}
+        </section>
+    </section>
+
+    <!-- THE SCHEDULED TAB -->
+    <section class="tab {% if tweets.automated.length > 0 %} hidden {% endif %}" data-tab="scheduled">
+        <!-- THE TAB TITLE -->
+        <h3 class="tab-title">Scheduled Tweets</h3>
+
+        <!-- THE RE-ORDER BUTTON -->
+        <button class="re-order" data-tab="scheduled" onclick="handleReOrderSwitch('tweets', 'scheduled')">
+            Re-Order Tweets
+        </button>
+
+        <!-- THE TWEETS -->
+        <section class="tweets" data-tab="automated">
+            {% for tweet in tweets.scheduled %}
+            <form
+                class="form tweet tweet-form {% if tweet.status == 'active' %}failed-form{% endif %}"
+                data-tweet-id="{{ tweet.id }}"
+                onsubmit="event.preventDefault();">
+                <!-- THE INDEX -->
+                <p class="form-index">{{ loop.index }}</p>
+
+                <!-- THE HEADING -->
+                <h3 class="form-heading" data-tweet-id="{{ tweet.id }}">Create a Tweet</h3>
+
+                <!-- THE ID -->
+                <input
+                    type="number"
+                    name="id"
+                    class="form-input hidden"
+                    data-tweet-id="{{ tweet.id }}"
+                    value="{{ tweet.id }}" />
+
+                <!-- THE FORM CONTAINER -->
+                <div class="form-container">
+                    <!-- THE FORM DIVISION -->
+                    <div class="form-division">
+                        <!-- THE MESSAGE -->
+                        <textarea
+                            name="message"
+                            class="form-textarea"
+                            data-tweet-id="{{ tweet.id }}"
+                            placeholder="What is happening?!">
+{{ tweet.message }}</textarea
+                        >
+
+                        <!-- THE LINK -->
+                        <!-- <input
+                            type="url"
+                            name="link"
+                            class="form-input"
+                            data-tweet-id="{{ tweet.id }}"
+                            placeholder="http(s)://(www.)example.org"
+                            value="{{ tweet.link }}" /> -->
+
+                        <!-- THE TAGS -->
+                        <input
+                            type="text"
+                            name="tags"
+                            class="form-input"
+                            data-tweet-id="{{ tweet.id }}"
+                            placeholder="Twitter|elonmusk|Dominos"
+                            value="{{ tweet.tags }}" />
+                    </div>
+
+                    <!-- THE PRIORITY -->
+                    <input
+                        type="number"
+                        name="priority"
+                        class="form-input hidden"
+                        data-tweet-id="{{ tweet.id }}"
+                        value="{{ tweet.priority }}" />
+
+                    <!-- THE FORM DIVISION -->
+                    <div class="form-division">
+                        <!-- THE MEDIA -->
+                        <section class="form-media" data-tweet-id="{{ tweet.id }}">
+                            <!-- THE DROP ZONE -->
+                            <div class="form-media-drop-zone" data-tweet-id="{{ tweet.id }}">Drop media here!</div>
+
+                            <!-- THE GALLERY -->
+                            <div class="form-media-gallery hidden" data-tweet-id="{{ tweet.id }}"></div>
+
+                            <!-- THE SECONDARY GALLERY -->
+                            <div class="form-media-gallery secondary" data-tweet-id="{{ tweet.id }}">
+                                <input
+                                    type="text"
+                                    name="images"
+                                    class="form-input hidden"
+                                    data-tweet-id="{{ tweet.id }}"
+                                    value="{{ tweet.media }}" />
+                            </div>
+
+                            <!-- THE FILE INPUT -->
+                            <input type="file" name="files" class="hidden" data-tweet-id="{{ tweet.id }}" multiple />
+
+                            <!-- THE MEDIA INPUT -->
+                            <input type="text" name="media" class="form-input hidden" data-tweet-id="{{ tweet.id }}" />
+                        </section>
+                    </div>
+
+                    <!-- THE FORM DIVISION -->
+                    <div class="form-division">
+                        <!-- THE TIME -->
+                        <input
+                            type="datetime-local"
+                            name="time"
+                            class="form-input"
+                            data-tweet-id="{{ tweet.id }}"
+                            value="{{ tweet.time }}" />
+
+                        <!-- THE BUTTONS -->
+                        <section class="form-buttons" data-tweet-id="{{ tweet.id }}">
+                            <button
+                                class="form-button form-button-schedule"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="createTweet('{{ tweet.id }}', 'scheduled')">
+                                Schedule
+                            </button>
+
+                            <button
+                                class="form-button form-button-automate"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="createTweet('{{ tweet.id }}', 'automated')">
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+
+                            <button
+                                class="form-button form-button-publish"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="createTweet('{{ tweet.id }}', 'publish')">
+                                Publish Now
+                            </button>
+
+                            <!-- THE DELETE BUTTON -->
+                            <button
+                                class="form-button form-button-delete"
+                                data-tweet-id="{{ tweet.id }}"
+                                onclick="deleteTweet('{{ tweet.id }}')">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </section>
+                    </div>
+                </div>
+            </form>
+            {% endfor %}
+        </section>
+    </section>
+</section>
+
+<input type="text" name="type" id="timesheet-type" class="hidden" value="tweet" />
+{% endblock %}
+
+<!-- THE SCRIPTS BLOCK -->
+{% block scripts %}
+<script src="/js/common/handleMedia.js"></script>
+<script src="/js/common/tweets/handleCreateTweet.js"></script>
+<script src="/js/common/tweets/handleDeleteTweet.js"></script>
+
+<script src="/js/common/handleTabSwitch.js"></script>
+<script src="/js/common/handleReOrderSwitch.js"></script>
+<script src="/js/common/handleSecondaryGallery.js"></script>
+<script src="/js/common/handleDateTimeOnAutomatedItems.js"></script>
+{% endblock %}
