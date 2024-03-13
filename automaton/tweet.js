@@ -11,7 +11,7 @@ const sleep = (millisec) => {
 
 const tweet = async (message, media, tags) => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         defaultViewport: null,
         args: ['--start-maximized', '--disable-notifications'],
         userDataDir: path.join(__dirname, 'userData'),
